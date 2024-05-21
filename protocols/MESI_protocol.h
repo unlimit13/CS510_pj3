@@ -10,8 +10,13 @@
 /** Cache states.  */
 typedef enum {
     MESI_CACHE_I = 1,
+    MESI_CACHE_IS,
+    MESI_CACHE_IE,
+    MESI_CACHE_IM,
     MESI_CACHE_S,
+    MESI_CACHE_SM,
     MESI_CACHE_E,
+    MESI_CACHE_EM,
     MESI_CACHE_M
 } MESI_cache_state_t;
 
@@ -27,14 +32,25 @@ public:
     void dump (void);
 
     inline void do_cache_I (Mreq *request);
+    inline void do_cache_IS (Mreq *request);
+    inline void do_cache_IE (Mreq *request);
+    inline void do_cache_IM (Mreq *request);
     inline void do_cache_S (Mreq *request);
+    inline void do_cache_SM (Mreq *request);
     inline void do_cache_E (Mreq *request);
+    inline void do_cache_EM (Mreq *request);
     inline void do_cache_M (Mreq *request);
 
     inline void do_snoop_I (Mreq *request);
+    inline void do_snoop_IS (Mreq *request);
+    inline void do_snoop_IE (Mreq *request);
+    inline void do_snoop_IM (Mreq *request);
     inline void do_snoop_S (Mreq *request);
+    inline void do_snoop_SM (Mreq *request);
     inline void do_snoop_E (Mreq *request);
+    inline void do_snoop_EM (Mreq *request);
     inline void do_snoop_M (Mreq *request);
+
 };
 
 #endif // _MESI_CACHE_H
