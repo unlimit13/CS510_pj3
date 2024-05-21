@@ -61,7 +61,27 @@ void MESI_protocol::process_snoop_request (Mreq *request)
 
 inline void MESI_protocol::do_cache_I (Mreq *request)
 {
+    switch (request->msg){
+        case LOAD:
+            send_GETS(request->addr);
+            if(get_shared_line()){
+                state = MESI_CACHE_IS;
+            }
+            else{
+                state = MESI_CACHE_IE;
+            }
+            Sim->cache_misses++;
+            break;
 
+        case STORE:
+            send_GETM(request->addr);
+            state = MESI_CACHE_IM;
+            Sim->cache_misses++;
+            break;
+        default:
+            request->print_msg (my_table->moduleID, "ERROR");
+            fatal_error ("Client: I state shouldn't see this message\n");
+    }
 }
 inline void MESI_protocol::do_cache_IS (Mreq *request)
 {
