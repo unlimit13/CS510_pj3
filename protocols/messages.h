@@ -24,6 +24,7 @@ typedef enum
 
     DATA,
 
+
     MREQ_INVALID,
 	MREQ_MESSAGE_NUM	// Use this to make a Stat Array of message types
 } message_t;

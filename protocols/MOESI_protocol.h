@@ -1,5 +1,5 @@
-#ifndef _MOESI_CACHE_H
-#define _MOESI_CACHE_H
+#ifndef _MOESI_PROTOCOL_H_
+#define _MOESI_PROTOCOL_H_
 
 #include "../sim/types.h"
 #include "../sim/enums.h"
@@ -7,14 +7,18 @@
 #include "../sim/mreq.h"
 #include "protocol.h"
 
-/** Cache states.  */
 typedef enum {
     MOESI_CACHE_I = 1,
+    MOESI_CACHE_IS,
+    MOESI_CACHE_IE,
+    MOESI_CACHE_IM,
     MOESI_CACHE_S,
+    MOESI_CACHE_SM,
     MOESI_CACHE_E,
     MOESI_CACHE_O,
+    MOESI_CACHE_OM,
     MOESI_CACHE_M
-} MOESI_cache_state_t;
+}MOESI_cache_state_t;
 
 class MOESI_protocol : public Protocol {
 public:
@@ -22,22 +26,35 @@ public:
     ~MOESI_protocol ();
 
     MOESI_cache_state_t state;
-    
+
     void process_cache_request (Mreq *request);
     void process_snoop_request (Mreq *request);
     void dump (void);
 
+private:
     inline void do_cache_I (Mreq *request);
+    inline void do_cache_IS (Mreq *request);
+    inline void do_cache_IE (Mreq *request);
+    inline void do_cache_IM (Mreq *request);
     inline void do_cache_S (Mreq *request);
+    inline void do_cache_SM (Mreq *request);
     inline void do_cache_E (Mreq *request);
     inline void do_cache_O (Mreq *request);
+    inline void do_cache_OM (Mreq *request);
     inline void do_cache_M (Mreq *request);
 
     inline void do_snoop_I (Mreq *request);
+    inline void do_snoop_IS (Mreq *request);
+    inline void do_snoop_IE (Mreq *request);
+    inline void do_snoop_IM (Mreq *request);
     inline void do_snoop_S (Mreq *request);
+    inline void do_snoop_SM (Mreq *request);
     inline void do_snoop_E (Mreq *request);
     inline void do_snoop_O (Mreq *request);
+    inline void do_snoop_OM (Mreq *request);
     inline void do_snoop_M (Mreq *request);
+
+    
 };
 
-#endif // _MOESI_CACHE_H
+#endif // _MOESI_PROTOCOL_H_
