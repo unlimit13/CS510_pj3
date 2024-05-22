@@ -147,7 +147,6 @@ inline void MSI_protocol::do_snoop_I (Mreq *request)
     case GETS:
     case GETM:
     case DATA:
-        // Do nothing since we are already in I state
         break;
     default:
         request->print_msg (my_table->moduleID, "ERROR");
@@ -232,7 +231,6 @@ inline void MSI_protocol::do_snoop_M (Mreq *request)
         state = MSI_CACHE_I;
         break;
     case DATA:
-        // This should not occur in M state
         fatal_error ("Client: M state shouldn't see this message\n");
         break;
     default:
